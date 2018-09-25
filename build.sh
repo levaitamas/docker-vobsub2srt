@@ -1,3 +1,6 @@
 #!/bin/bash
 
-docker build --tag vobsub2srt .
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+
+docker build --tag vobsub2srt "$SCRIPTPATH"
