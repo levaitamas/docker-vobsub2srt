@@ -13,10 +13,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM debian:9
+FROM debian:9-slim
 
 RUN apt-get update \
-    && apt-get install -y git libtiff5-dev libtesseract-dev tesseract-ocr-eng build-essential cmake pkg-config \
+    && apt-get install --no-install-recommends -y git ca-certificates libtiff5-dev libtesseract-dev tesseract-ocr-eng build-essential cmake pkg-config \
     && apt-get clean \
     && git clone https://gitlab.com/ahayzen/mirror-VobSub2SRT.git VobSub2SRT \
     && cd VobSub2SRT \
@@ -25,7 +25,9 @@ RUN apt-get update \
     && make -j`nproc` \
     && make install \
     && make clean \
-    && apt-get purge -y git cmake pkg-config build-essential \
+    && cd .. \
+    && rm -rf VobSub2SRT \
+    && apt-get purge -y git ca-certificates cmake pkg-config build-essential \
     && apt-get autoremove -y
 
 RUN echo "cd /subs" > /root/.bashrc \
