@@ -16,11 +16,12 @@
 FROM ubuntu:16.04
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y git ca-certificates libtiff5-dev libtesseract-dev tesseract-ocr-eng build-essential cmake pkg-config \
+    && apt-get install --no-install-recommends -y git ca-certificates wget libtiff5-dev libtesseract-dev build-essential cmake pkg-config \
     && apt-get clean \
-    && git clone https://gitlab.com/ahayzen/mirror-VobSub2SRT.git VobSub2SRT \
+    && wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/share/tesseract-ocr/4.00/tessdata/eng.traineddata \
+    && git clone https://github.com/ecdye/VobSub2SRT.git VobSub2SRT \
     && cd VobSub2SRT \
-    && git checkout 0ba6e25e078a040195d7295e860cc9064bef7c2c \
+    && git checkout f3205f54448505e56daaf7449fdddc1a4d036d50 \
     && ./configure \
     && make -j`nproc` \
     && make install \
