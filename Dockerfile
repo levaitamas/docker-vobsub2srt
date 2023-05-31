@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM debian:9-slim
+FROM ubuntu:16.04
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y git ca-certificates libtiff5-dev libtesseract-dev tesseract-ocr-eng build-essential cmake pkg-config \
