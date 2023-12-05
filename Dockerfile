@@ -29,7 +29,7 @@ RUN apt-get update \
     && cd .. \
     && rm -rf VobSub2SRT \
     && strip /usr/local/bin/vobsub2srt \
-    && apt-get purge -y git ca-certificates cmake pkg-config build-essential \
+    && apt-get purge -y git ca-certificates cmake pkg-config build-essential wget \
     && apt-get autoremove -y
 
 RUN echo "cd /subs" > /root/.bashrc \
