@@ -13,24 +13,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM ubuntu:16.04
+FROM debian:12-slim
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y git ca-certificates wget libtiff5-dev libtesseract-dev build-essential cmake pkg-config \
-    && apt-get clean \
-    && wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/share/tesseract-ocr/4.00/tessdata/eng.traineddata \
+    && apt-get install --no-install-recommends -y git ca-certificates libtiff5-dev libtesseract-dev tesseract-ocr-eng build-essential cmake pkg-config \
     && git clone https://github.com/ecdye/VobSub2SRT.git VobSub2SRT \
     && cd VobSub2SRT \
     && git checkout f3205f54448505e56daaf7449fdddc1a4d036d50 \
+    && sed -Ei 's/#include <vector>/#include <vector>\n#include <climits>/' src/vobsub2srt.c++ \
     && ./configure \
     && make -j`nproc` \
     && make install \
-    && make clean \
+    && make distclean \
     && cd .. \
     && rm -rf VobSub2SRT \
     && strip /usr/local/bin/vobsub2srt \
-    && apt-get purge -y git ca-certificates cmake pkg-config build-essential wget \
-    && apt-get autoremove -y
+    && apt-get purge -y git ca-certificates cmake pkg-config build-essential \
+    && apt-get autoremove -y \
+    && apt-get clean
 
 RUN echo "cd /subs" > /root/.bashrc \
     && echo "conv() { vobsub2srt --blacklist \"|\/_~<>\" --verbose \"\$1\" && chown 1000:1000 \"\$1.srt\"; }" >> /root/.bashrc
