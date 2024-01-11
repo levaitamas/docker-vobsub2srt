@@ -20,7 +20,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: levaitamas/docker-vobsub2srt
+          images: levaitamas/vobsub2srt
           tags: |
             type=raw,value=latest
 

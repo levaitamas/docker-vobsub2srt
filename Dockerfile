@@ -1,5 +1,5 @@
-# Copyright (C) 2023 Tamas Levai <levait@tmit.bme.hu>
-# Copyright (C) 2018 Andrew Hayzen <ahayzen@gmail.com>
+# Copyright (C) 2023- Tamas Levai <levait@tmit.bme.hu>
+# Copyright (C) 2018  Andrew Hayzen <ahayzen@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as

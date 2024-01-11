@@ -1,8 +1,8 @@
 # docker-vobsub2srt
 
 <p align="left">
- <a href="https://hub.docker.com/r/levaitamas/docker-vobsub2srt" alt="Docker pulls">
-  <img src="https://img.shields.io/docker/pulls/levaitamas/docker-vobsub2srt" /></a>
+ <a href="https://hub.docker.com/r/levaitamas/vobsub2srt" alt="Docker pulls">
+  <img src="https://img.shields.io/docker/pulls/levaitamas/vobsub2srt" /></a>
 
 ## How to use?
 
@@ -12,11 +12,11 @@
 
 If you use `podman`:
 ```shell
-podman run --rm -ti --volume /path-to-subs:/subs --security-opt label=disable docker.io/levaitamas/docker-vobsub2srt:latest conv <subfile>
+podman run --rm -ti --volume /path-to-subs:/subs --security-opt label=disable docker.io/levaitamas/vobsub2srt:latest conv <subfile>
 ```
 If you use `docker`:
 ```shell
-sudo docker run -it --rm -v /path-to-subs:/subs levaitamas/docker-vobsub2srt conv <subfile>
+sudo docker run -it --rm -v /path-to-subs:/subs levaitamas/vobsub2srt conv <subfile>
 ```
 
 ## vobsub2srt documentation
