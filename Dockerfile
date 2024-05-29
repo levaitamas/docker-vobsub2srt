@@ -14,11 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM debian:12-slim
+FROM alpine:3.20
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y git ca-certificates libtiff5-dev libtesseract-dev build-essential cmake pkg-config wget \
-    && wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/share/tesseract-ocr/5/tessdata/eng.traineddata \
+RUN apk add --no-cache bash wget ca-certificates git cmake make pkgconf g++ tiff-dev tesseract-ocr-dev \
+    && wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/share/tessdata/eng.traineddata \
     && git clone https://github.com/ecdye/VobSub2SRT.git VobSub2SRT \
     && cd VobSub2SRT \
     && git checkout f3205f54448505e56daaf7449fdddc1a4d036d50 \
@@ -30,9 +29,7 @@ RUN apt-get update \
     && cd .. \
     && rm -rf VobSub2SRT \
     && strip /usr/local/bin/vobsub2srt \
-    && apt-get purge -y git ca-certificates cmake pkg-config build-essential wget \
-    && apt-get autoremove -y \
-    && apt-get clean
+    && apk del git wget ca-certificates cmake make pkgconf g++
 
 RUN echo "cd /subs" > /root/.bashrc \
     && echo "conv() { vobsub2srt --blacklist \"|\/_~<>\" --verbose \"\$1\" && chown 1000:1000 \"\$1.srt\"; }" >> /root/.bashrc
