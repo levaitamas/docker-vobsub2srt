@@ -34,4 +34,4 @@ RUN apk add --no-cache bash wget ca-certificates git cmake make pkgconf g++ tiff
 RUN echo "cd /subs" > /root/.bashrc \
     && echo "conv() { vobsub2srt --blacklist \"|\/_~<>\" --verbose \"\$1\" && chown 1000:1000 \"\$1.srt\"; }" >> /root/.bashrc
 
-CMD /bin/bash
+CMD ["/bin/bash"]
