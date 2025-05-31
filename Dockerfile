@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM alpine:3.21.3
+FROM alpine:3.22
 
 RUN apk add --no-cache bash wget ca-certificates git cmake make pkgconf g++ tiff-dev tesseract-ocr-dev \
     && wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/share/tessdata/eng.traineddata \
