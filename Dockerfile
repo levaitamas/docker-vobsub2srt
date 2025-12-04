@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM alpine:3.22
+FROM alpine:3.23
 
 RUN apk add --no-cache bash wget ca-certificates git cmake make pkgconf g++ tiff-dev tesseract-ocr-dev \
     && wget https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata -O /usr/share/tessdata/eng.traineddata \
@@ -22,7 +22,7 @@ RUN apk add --no-cache bash wget ca-certificates git cmake make pkgconf g++ tiff
     && cd VobSub2SRT \
     && git checkout 8ea2e11ab3cc64bd94475942276dfa47b1b59bcc \
     && sed -Ei 's/#include <vector>/#include <vector>\n#include <climits>/' src/vobsub2srt.c++ \
-    && ./configure \
+    && ./configure -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     && make -j`nproc` \
     && make install \
     && make distclean \
